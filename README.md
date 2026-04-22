@@ -2,7 +2,7 @@
 
 LLM-assisted vulnerability scanning and adversarial evaluation framework for studying robustness, failure modes, and class-dependent fragility in LLM security analysis.
 
-## The problem (plain English)
+## The problem
 
 Modern codebases are too large and fast-moving for purely manual security review, so teams increasingly use LLMs to help find vulnerabilities. The core problem is reliability: an LLM can appear strong on one prompt or code view, then miss the same bug when context is reduced, summarized, or adversarially framed.
 
@@ -12,7 +12,7 @@ Modern codebases are too large and fast-moving for purely manual security review
 
 ## Foundation and expansion
 
-This repository builds on the April 9 preprint, *The Semantic Cliff: Class-Dependent Fragility of LLM Vulnerability Detection under Context Summarization* (Hooker, 2026), and extends it from a single core experiment into a broader evaluation suite. The April 9 framing established the context-sensitivity hypothesis; this codebase expands that work with adversarial suppression tests, scanner-poison trials, multi-turn self-audit checks, cross-language transplants, and reproducible aggregation/plotting tooling.
+This repository builds on the April 9 arXiv preprint, *Vulnerability Detection with Interprocedural Context in Multiple Languages: Assessing Effectiveness and Cost of Modern LLMs* (Kevin Lira et al., 2026), and extends that line of inquiry into a broader adversarial evaluation suite. The April 9 study established strong evidence that context design materially affects LLM vulnerability detection quality and cost; this codebase expands that direction with context-isolation stress tests, adversarial suppression trials, scanner-poison experiments, multi-turn self-audit checks, cross-language transplants, and reproducible aggregation/plotting tooling.
 
 ## Core research contributions
 
@@ -311,21 +311,20 @@ python3 eval_pipeline.py --resume --delay 1.5
 
 ## Citation
 
-If you use **vulnscan** or the **Semantic Cliff** experiments, please cite (update `url` when the canonical repo or DOI is final):
+If you use **vulnscan**, please cite this repository. If you discuss the April 9 **Semantic Cliff** foundation, cite Kevin Lira's preprint separately.
 
 ```bibtex
-@misc{hooker2026semanticcliff,
-  title  = {The Semantic Cliff: Class-Dependent Fragility of LLM
-            Vulnerability Detection under Context Summarization},
+@software{hooker2026vulnscan,
+  title  = {vulnscan: LLM-assisted vulnerability scanning and adversarial evaluation},
   author = {Hooker, Remley},
   year   = {2026},
   month  = apr,
-  note   = {Preprint. Independent researcher.},
+  note   = {Software and research artifact.},
   url    = {https://github.com/remleyhooker/vulnscan}
 }
 ```
 
-**APA-style (plain text):** Hooker, R. (2026). *The Semantic Cliff: Class-dependent fragility of LLM vulnerability detection under context summarization* [Preprint]. https://github.com/remleyhooker/vulnscan
+**APA-style (plain text):** Hooker, R. (2026). *vulnscan: LLM-assisted vulnerability scanning and adversarial evaluation* [Software]. https://github.com/remleyhooker/vulnscan
 
 ---
 
