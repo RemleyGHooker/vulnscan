@@ -1,6 +1,17 @@
 # vulnscan
 
-LLM-assisted vulnerability scanning **plus** a controlled **adversarial synthesis** loop to evaluate what the scanner actually catches.
+LLM-assisted vulnerability scanning and adversarial evaluation framework for studying robustness, failure modes, and class-dependent fragility in LLM security analysis.
+
+## Research abstract
+
+`vulnscan` is built as a reproducible research artifact, not only a scanner CLI. The project evaluates how vulnerability detection changes under controlled perturbations: context isolation, context summarization, adversarial source comments, scanner poisoning, multi-turn self-audit, and cross-language transplant tests. The central result is a "semantic cliff": some vulnerability classes remain robust, while others collapse under reduced context and recover only when semantically rich security summaries are reintroduced.
+
+## Core research contributions
+
+- A unified scan/eval pipeline that supports both practical repo scanning and controlled adversarial experiments.
+- A class-conditional context-isolation protocol comparing full-file, isolated-window, template summary, and LLM security-summary conditions.
+- Paired suppression/poison experiments that isolate whether prompt-injection-like comments measurably change detection.
+- Structured artifacts for reproducibility (`manifest` JSONs, aggregate CSV/JSON outputs, and figure-generation scripts).
 
 ---
 
@@ -22,6 +33,37 @@ LLM-assisted vulnerability scanning **plus** a controlled **adversarial synthesi
 
 ---
 
+## Research visuals
+
+### Study design at a glance
+
+```mermaid
+flowchart TD
+  RQ[Research questions] --> E1[Context isolation]
+  RQ --> E2[Comment suppression]
+  RQ --> E3[Scanner poison]
+  RQ --> E4[Self-knowledge / transplant / sleeper]
+  E1 --> M[Unified metrics + manifests]
+  E2 --> M
+  E3 --> M
+  E4 --> M
+  M --> A[Aggregate JSON + CSV]
+  A --> P[Paper tables + figures]
+```
+
+### Semantic cliff intuition
+
+```mermaid
+flowchart LR
+  F[Full context] -->|Summarize/trim context| I[Isolated or template context]
+  I -->|Class-dependent drop| C[Detection cliff]
+  C -->|Add LLM security summary| R[Recovery for fragile classes]
+```
+
+> Tip: add your paper figure export (for example `assets/semantic-cliff.png`) and embed it here once finalized.
+
+---
+
 ## Paper (preprint)
 
 **The Semantic Cliff: Class-Dependent Fragility of LLM Vulnerability Detection under Context Summarization**
@@ -35,11 +77,13 @@ LLM-assisted vulnerability scanning **plus** a controlled **adversarial synthesi
 
 This repo contains the pipeline used to produce the results summarized in [`paper.tex`](paper.tex). Primary quantitative runs used **\(N = 50\)** samples per experiment suite (aggregate Wilson CIs in `runs/aggregate_50_all_llm.json`); scaling to **\(N \geq 200\)** per suite tightens intervals for venue submission.
 
-- **Semantic cliff (context):** In context isolation, **buffer overflow** detection drops from **100% → 17%** under isolated or template summarization, then **recovers to 100%** with an LLM security-focused summary prefix (same manifest run as in the paper tables).
-- **SQL injection (control):** **100%** detection across full, isolated, template, and LLM-summary conditions in that run.
-- **Memory leak:** **100% → 67%** (isolated/template) → **100%** (LLM summary).
-- **Signal vs. raw context:** Aggregate context-isolation rates: full-file **0.96**, isolated **0.84**, template **0.84**, LLM summary **0.98** (Wilson CIs in aggregate JSON).
-- **Adversarial comments:** Comment suppression shows **no net drop** (**0.96 → 0.96**); scanner-poison paired condition is also flat (**0.36 → 0.36**) in the reported aggregate run — i.e., comment tricks did not move the needle relative to baseline in that setup.
+### Novel empirical findings
+
+- **Semantic cliff (class-dependent collapse):** In context isolation, **buffer overflow** detection drops from **100% -> 17%** under isolated/template summarization, then **recovers to 100%** with an LLM security-focused summary prefix.
+- **Class-conditional robustness:** **SQL injection** remains at **100%** across full, isolated, template, and LLM-summary conditions in the same run.
+- **Partial fragility with recovery:** **Memory leak** shifts **100% -> 67%** (isolated/template) -> **100%** (LLM summary).
+- **Compression quality matters more than compression itself:** Aggregate context rates are full-file **0.96**, isolated **0.84**, template **0.84**, and LLM summary **0.98**, indicating semantically informed summaries can outperform raw full-context baselines.
+- **Prompt-style comment attacks were ineffective in this setup:** Comment suppression is flat (**0.96 -> 0.96**) and scanner-poison paired condition is also flat (**0.36 -> 0.36**) in the reported aggregate run.
 
 Artifacts: `runs/ctx_50_llm/context_isolation_manifest.json`, `runs/aggregate_50_all_llm.json`, `runs/aggregate_50_all_llm.csv`, figure `runs/results_semantic_cliff_llm.png`.
 
