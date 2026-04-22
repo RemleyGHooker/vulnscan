@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vulnscan"
+version = "0.1.0"
+description = "LLM vulnerability scanning with adversarial eval and multi-model compare"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "anthropic>=0.40.0",
+  "gitpython>=3.1.43",
+  "rich>=13.7.0",
+  "groq>=0.11.0",
+]
+
+[project.scripts]
+vulnscan = "main:main"
+
+[tool.setuptools]
+py-modules = [
+  "main",
+  "engine",
+  "scanner",
+  "llm_client",
+  "llm_groq",
+  "prompts",
+  "reporter",
+  "adversarial",
+  "compare",
+  "cvebench",
+  "comment_suppress",
+  "self_knowledge",
+  "transplant",
+  "scanner_poison",
+  "sleeper_experiment",
+  "eval_pipeline",
+  "git_paths",
+  "multi_turn_audit",
+  "scanner_poison_vs_suppress_analysis",
+  "context_isolation",
+  "aggregate_research_results",
+]

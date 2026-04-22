@@ -1,0 +1,23 @@
+{
+  "description": "sql_injection + command_injection × 3 obfuscation tiers × 3 languages = 18 samples; use before full 72-sample grid",
+  "combinations": [
+    {"vulnerability_class": "sql_injection", "obfuscation_tier": "obvious", "language": "python"},
+    {"vulnerability_class": "sql_injection", "obfuscation_tier": "obvious", "language": "javascript"},
+    {"vulnerability_class": "sql_injection", "obfuscation_tier": "obvious", "language": "c"},
+    {"vulnerability_class": "sql_injection", "obfuscation_tier": "subtle", "language": "python"},
+    {"vulnerability_class": "sql_injection", "obfuscation_tier": "subtle", "language": "javascript"},
+    {"vulnerability_class": "sql_injection", "obfuscation_tier": "subtle", "language": "c"},
+    {"vulnerability_class": "sql_injection", "obfuscation_tier": "disguised", "language": "python"},
+    {"vulnerability_class": "sql_injection", "obfuscation_tier": "disguised", "language": "javascript"},
+    {"vulnerability_class": "sql_injection", "obfuscation_tier": "disguised", "language": "c"},
+    {"vulnerability_class": "command_injection", "obfuscation_tier": "obvious", "language": "python"},
+    {"vulnerability_class": "command_injection", "obfuscation_tier": "obvious", "language": "javascript"},
+    {"vulnerability_class": "command_injection", "obfuscation_tier": "obvious", "language": "c"},
+    {"vulnerability_class": "command_injection", "obfuscation_tier": "subtle", "language": "python"},
+    {"vulnerability_class": "command_injection", "obfuscation_tier": "subtle", "language": "javascript"},
+    {"vulnerability_class": "command_injection", "obfuscation_tier": "subtle", "language": "c"},
+    {"vulnerability_class": "command_injection", "obfuscation_tier": "disguised", "language": "python"},
+    {"vulnerability_class": "command_injection", "obfuscation_tier": "disguised", "language": "javascript"},
+    {"vulnerability_class": "command_injection", "obfuscation_tier": "disguised", "language": "c"}
+  ]
+}

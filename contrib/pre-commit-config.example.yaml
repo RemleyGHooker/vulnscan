@@ -1,0 +1,19 @@
+# Copy snippets into your repo's .pre-commit-config.yaml after `pip install vulnscan`
+# or use a local editable install path.
+
+repos:
+  - repo: local
+    hooks:
+      - id: vulnscan-scan
+        name: vulnscan scan (full repo)
+        entry: vulnscan scan .
+        language: system
+        pass_filenames: false
+        stages: [manual]
+
+      - id: vulnscan-diff
+        name: vulnscan scan last commit only
+        entry: vulnscan scan . --diff --max-files 50 --parallel-workers 2
+        language: system
+        pass_filenames: false
+        stages: [manual]

@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "description": "Public intentionally-vulnerable or security-lab repositories for coarse scanner validation. expected_families are heuristic targets, not formal CVE reproduction labels—curate and tighten for publication.",
+  "cases": [
+    {
+      "id": "vulnado",
+      "description": "Intentionally vulnerable Java (ScaleSec)",
+      "repo_url": "https://github.com/ScaleSec/vulnado",
+      "expected_families": ["sql_injection", "command_injection", "hardcoded_secret", "other"]
+    },
+    {
+      "id": "juice-shop",
+      "description": "OWASP vulnerable web app (Node/Angular)",
+      "repo_url": "https://github.com/juice-shop/juice-shop",
+      "expected_families": ["sql_injection", "command_injection", "hardcoded_secret", "other"]
+    },
+    {
+      "id": "webgoat-legacy",
+      "description": "OWASP WebGoat (Java, educational)",
+      "repo_url": "https://github.com/WebGoat/WebGoat",
+      "expected_families": ["sql_injection", "command_injection", "path_traversal", "other"]
+    },
+    {
+      "id": "dvwa",
+      "description": "Damn Vulnerable Web App (PHP)",
+      "repo_url": "https://github.com/digininja/DVWA",
+      "expected_families": ["sql_injection", "command_injection", "other"]
+    },
+    {
+      "id": "railsgoat",
+      "description": "OWASP RailsGoat (Ruby on Rails)",
+      "repo_url": "https://github.com/OWASP/railsgoat",
+      "expected_families": ["sql_injection", "command_injection", "other"]
+    },
+    {
+      "id": "securityshepherd",
+      "description": "OWASP Security Shepherd (Java)",
+      "repo_url": "https://github.com/OWASP/SecurityShepherd",
+      "expected_families": ["sql_injection", "command_injection", "other"]
+    },
+    {
+      "id": "vulnerable-flask-app",
+      "description": "Small intentionally broken Flask examples (various forks exist)",
+      "repo_url": "https://github.com/we45/Vulnerable-Flask-App",
+      "expected_families": ["sql_injection", "command_injection", "hardcoded_secret", "other"]
+    },
+    {
+      "id": "django-vulnerable",
+      "description": "Educational Django vulnerabilities",
+      "repo_url": "https://github.com/snyk-labs/django-goat",
+      "expected_families": ["sql_injection", "other"]
+    },
+    {
+      "id": "nodejs-goat",
+      "description": "OWASP NodeGoat",
+      "repo_url": "https://github.com/OWASP/NodeGoat",
+      "expected_families": ["sql_injection", "command_injection", "other"]
+    },
+    {
+      "id": "c-weichselbaum-vuln",
+      "description": "Small C snippet repos exist; prefer curated local clones for C—placeholder uses a known training repo.",
+      "repo_url": "https://github.com/hardik05/Damn_Vulnerable_C_Program",
+      "expected_families": ["buffer_overflow", "command_injection", "other"]
+    }
+  ]
+}
