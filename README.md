@@ -2,9 +2,17 @@
 
 LLM-assisted vulnerability scanning and adversarial evaluation framework for studying robustness, failure modes, and class-dependent fragility in LLM security analysis.
 
-## Research abstract
+## The problem (plain English)
 
-`vulnscan` is built as a reproducible research artifact, not only a scanner CLI. The project evaluates how vulnerability detection changes under controlled perturbations: context isolation, context summarization, adversarial source comments, scanner poisoning, multi-turn self-audit, and cross-language transplant tests. The central result is a "semantic cliff": some vulnerability classes remain robust, while others collapse under reduced context and recover only when semantically rich security summaries are reintroduced.
+Modern codebases are too large and fast-moving for purely manual security review, so teams increasingly use LLMs to help find vulnerabilities. The core problem is reliability: an LLM can appear strong on one prompt or code view, then miss the same bug when context is reduced, summarized, or adversarially framed.
+
+## How this work solves it
+
+`vulnscan` turns that reliability question into a measurable research workflow. Instead of only asking "did the model find bugs?", it runs controlled experiments across context conditions and attack-style perturbations, logs machine-readable artifacts, and compares detection behavior class-by-class.
+
+## Foundation and expansion
+
+This repository builds on the April 9 preprint, *The Semantic Cliff: Class-Dependent Fragility of LLM Vulnerability Detection under Context Summarization* (Hooker, 2026), and extends it from a single core experiment into a broader evaluation suite. The April 9 framing established the context-sensitivity hypothesis; this codebase expands that work with adversarial suppression tests, scanner-poison trials, multi-turn self-audit checks, cross-language transplants, and reproducible aggregation/plotting tooling.
 
 ## Core research contributions
 
@@ -12,6 +20,20 @@ LLM-assisted vulnerability scanning and adversarial evaluation framework for stu
 - A class-conditional context-isolation protocol comparing full-file, isolated-window, template summary, and LLM security-summary conditions.
 - Paired suppression/poison experiments that isolate whether prompt-injection-like comments measurably change detection.
 - Structured artifacts for reproducibility (`manifest` JSONs, aggregate CSV/JSON outputs, and figure-generation scripts).
+
+## Findings snapshot
+
+- **Semantic cliff:** Buffer overflow drops **100% -> 17%** with isolated/template context, then recovers to **100%** with LLM security-summary context.
+- **Class-conditional robustness:** SQL injection remains **100%** across full, isolated, template, and LLM-summary conditions in the same run.
+- **Memory leak pattern:** Memory leak shifts **100% -> 67% -> 100%** across full -> isolated/template -> LLM-summary.
+- **Comment attacks in this setup:** Comment suppression is flat (**0.96 -> 0.96**), and scanner-poison is also flat (**0.36 -> 0.36**).
+
+## Continued progress
+
+- Scaling from exploratory runs toward larger-sample evaluations (`N >= 200`) for tighter confidence intervals.
+- Expanding cross-model and cross-language comparisons while keeping manifests and prompts reproducible.
+- Hardening evaluation quality with clearer labeling criteria and stronger human-adjudication workflows.
+- Converting paper artifacts into release-ready figures and tables for public dissemination.
 
 ---
 
@@ -24,12 +46,6 @@ LLM-assisted vulnerability scanning and adversarial evaluation framework for stu
 </p>
 
 *Stylized screenshot of the CLI. For a **real** recording, run against intentionally vulnerable apps such as **[vulnado](https://github.com/ScaleSec/vulnado)** (Java) or **[DVWA](https://github.com/digininja/DVWA)** (PHP), then capture the terminal.*
-
-**Make a demo GIF (30–60s):**
-
-1. [asciinema](https://asciinema.org/) — `asciinema rec demo.cast`, run `vulnscan`, `asciinema upload` or convert cast → GIF with [agg](https://github.com/asciinema/agg) / asciicast2gif.  
-2. Or screen record with **QuickTime** (macOS), then convert with **[ezgif.com/video-to-gif](https://ezgif.com/video-to-gif)**.  
-3. Replace the image above with `![demo](assets/demo.gif)` (or keep both: static + GIF).
 
 ---
 
