@@ -28,6 +28,14 @@ This repository builds on the April 9 arXiv preprint, *Vulnerability Detection w
 - **Memory leak pattern:** Memory leak shifts **100% -> 67% -> 100%** across full -> isolated/template -> LLM-summary.
 - **Comment attacks in this setup:** Comment suppression is flat (**0.96 -> 0.96**), and scanner-poison is also flat (**0.36 -> 0.36**).
 
+## What is genuinely new here
+
+- **Class-conditional failure, not just average drop:** Results show a true semantic cliff where one vulnerability family can collapse under context compression while another remains stable.
+- **Intervention-style recovery evidence:** Detection for fragile classes can recover when context is reintroduced as a targeted LLM security summary, suggesting summary design is a controllable lever.
+- **Non-monotonic context effects:** "Less context" is not uniformly worse; behavior depends on vulnerability type and representation quality.
+- **Useful negative results:** Flat suppression/poison outcomes are still informative because they bound which prompt-injection-style attacks did not move detection in this setup.
+- **Reusable research protocol:** The contribution is not only outcome metrics but a reproducible methodology (paired conditions, manifests, and plot pipeline) that others can scale with larger budgets.
+
 ## Visual findings
 
 These screenshots highlight why the results are exciting: the pipeline surfaces clear class-conditional behavior instead of a single averaged score.
