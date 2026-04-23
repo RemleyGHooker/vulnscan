@@ -28,6 +28,24 @@ This repository builds on the April 9 arXiv preprint, *Vulnerability Detection w
 - **Memory leak pattern:** Memory leak shifts **100% -> 67% -> 100%** across full -> isolated/template -> LLM-summary.
 - **Comment attacks in this setup:** Comment suppression is flat (**0.96 -> 0.96**), and scanner-poison is also flat (**0.36 -> 0.36**).
 
+## Visual findings
+
+These screenshots highlight why the results are exciting: the pipeline surfaces clear class-conditional behavior instead of a single averaged score.
+
+<p align="center">
+  <img src="runs/results_semantic_cliff_llm.png" alt="Semantic cliff figure with recovery under LLM security summary context" width="760">
+</p>
+
+<p align="center">
+  <img src="runs/results_semantic_cliff.png" alt="Semantic cliff baseline figure for context conditions" width="760">
+</p>
+
+## Pilot scope and why this matters
+
+This is a **pilot-scale study** designed to establish signal, stress-test methodology, and publish reproducible artifacts. The current runs already show non-trivial, class-dependent failure/recovery dynamics that are meaningful for real LLM security tooling.
+
+With a larger budget, the same framework can be taken substantially further: bigger sample sizes (`N >> 200`), multi-model replication across providers, stronger human-adjudicated labels, and broader language/repository coverage. In short, the pilot demonstrates a strong foundation and a clear path to higher-powered follow-on studies.
+
 ## Continued progress
 
 - Scaling from exploratory runs toward larger-sample evaluations (`N >= 200`) for tighter confidence intervals.
